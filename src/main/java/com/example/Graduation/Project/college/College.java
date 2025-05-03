@@ -1,8 +1,12 @@
-package com.example.Graduation.Project.entity;
+package com.example.Graduation.Project.college;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "colleges")
 @Data
@@ -14,4 +18,5 @@ public class College {
 
     @Column(name = "college_name", nullable = false, unique = true)
     private String collegeName;
+
 }

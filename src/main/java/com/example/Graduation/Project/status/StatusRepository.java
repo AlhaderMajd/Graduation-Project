@@ -1,8 +1,9 @@
-package com.example.Graduation.Project.repository;
+package com.example.Graduation.Project.status;
 
-import com.example.Graduation.Project.entity.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface StatusRepository extends JpaRepository<Status, Long> {
     Status findByStatusName(String statusName);
+    boolean existsByStatusName(String name);
+
 }

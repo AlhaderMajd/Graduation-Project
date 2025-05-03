@@ -1,10 +1,17 @@
-package com.example.Graduation.Project.entity;
+package com.example.Graduation.Project.activity;
 
+import com.example.Graduation.Project.activityType.ActivityType;
+import com.example.Graduation.Project.location.Location;
+import com.example.Graduation.Project.user.User;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "activities")
 @Data
@@ -44,4 +51,5 @@ public class Activity {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
 }

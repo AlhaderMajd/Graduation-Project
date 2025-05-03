@@ -1,6 +1,5 @@
-package com.example.Graduation.Project.repository;
+package com.example.Graduation.Project.activity;
 
-import com.example.Graduation.Project.entity.Activity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

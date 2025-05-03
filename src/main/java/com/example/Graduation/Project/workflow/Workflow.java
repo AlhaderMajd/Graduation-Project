@@ -1,10 +1,17 @@
-package com.example.Graduation.Project.entity;
+package com.example.Graduation.Project.workflow;
 
+import com.example.Graduation.Project.activity.Activity;
+import com.example.Graduation.Project.status.Status;
+import com.example.Graduation.Project.user.User;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "worksflow")
 @Data
@@ -31,4 +38,5 @@ public class Workflow {
 
     @Column(name = "comment")
     private String comment;
+
 }

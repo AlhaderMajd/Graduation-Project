@@ -1,8 +1,9 @@
-package com.example.Graduation.Project.repository;
+package com.example.Graduation.Project.role;
 
-import com.example.Graduation.Project.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {
     Role findByRoleName(String roleName);
+    boolean existsByRoleName(String name);
+
 }
