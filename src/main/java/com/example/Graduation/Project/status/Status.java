@@ -1,5 +1,4 @@
 package com.example.Graduation.Project.status;
-
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;

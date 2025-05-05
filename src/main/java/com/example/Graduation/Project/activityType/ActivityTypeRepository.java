@@ -2,8 +2,4 @@ package com.example.Graduation.Project.activityType;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ActivityTypeRepository extends JpaRepository<ActivityType, Long> {
-    ActivityType findByTypeName(String typeName);
-    boolean existsByTypeName(String name);
-
-}
+public interface ActivityTypeRepository extends JpaRepository<ActivityType, Long> {}

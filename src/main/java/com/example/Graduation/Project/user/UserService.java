@@ -1,28 +1,85 @@
 package com.example.Graduation.Project.user;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import com.example.Graduation.Project.college.College;
+import com.example.Graduation.Project.college.CollegeRepository;
+import com.example.Graduation.Project.role.Role;
+import com.example.Graduation.Project.role.RoleRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-public class UserService implements UserDetailsService {
-
+public class UserService {
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
+    private final RoleRepository roleRepository;
+    private final CollegeRepository collegeRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(
+            UserRepository userRepository,
+            UserMapper userMapper,
+            RoleRepository roleRepository,
+            CollegeRepository collegeRepository
+    ) {
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
+        this.roleRepository = roleRepository;
+        this.collegeRepository = collegeRepository;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+    public List<UserResponse> findAll() {
+        return userRepository.findAll()
+                .stream()
+                .map(userMapper::toUserResponse)
+                .collect(Collectors.toList());
+    }
 
-        return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getEmail())
-                .password(user.getPassword())
-                .roles(user.getRole().getRoleName()) // Make sure role names start with ROLE_
-                .build();
+    public UserResponse findById(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+        return userMapper.toUserResponse(user);
+    }
+
+    @Transactional
+    public UserResponse create(UserRequest userRequest) {
+        Role role = roleRepository.findById(userRequest.getRoleId())
+                .orElseThrow(() -> new RuntimeException("Role not found with id: " + userRequest.getRoleId()));
+
+        College college = collegeRepository.findById(userRequest.getCollegeId())
+                .orElseThrow(() -> new RuntimeException("College not found with id: " + userRequest.getCollegeId()));
+
+        User user = userMapper.toUser(userRequest, role, college);
+        User savedUser = userRepository.save(user);
+        return userMapper.toUserResponse(savedUser);
+    }
+
+    @Transactional
+    public UserResponse update(Long id, UserRequest userRequest) {
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+
+        Role role = roleRepository.findById(userRequest.getRoleId())
+                .orElseThrow(() -> new RuntimeException("Role not found with id: " + userRequest.getRoleId()));
+
+        College college = collegeRepository.findById(userRequest.getCollegeId())
+                .orElseThrow(() -> new RuntimeException("College not found with id: " + userRequest.getCollegeId()));
+
+        existingUser.setEmail(userRequest.getEmail());
+        existingUser.setPassword(userRequest.getPassword());
+        existingUser.setFullName(userRequest.getFullName());
+        existingUser.setPhone(userRequest.getPhone());
+        existingUser.setRole(role);
+        existingUser.setCollege(college);
+
+        User updatedUser = userRepository.save(existingUser);
+        return userMapper.toUserResponse(updatedUser);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+        userRepository.delete(user);
     }
 }
