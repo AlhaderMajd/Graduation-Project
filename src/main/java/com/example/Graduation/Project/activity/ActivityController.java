@@ -1,11 +1,14 @@
 package com.example.Graduation.Project.activity;
 
+import com.example.Graduation.Project.logging.annotation.LogExecutionTime;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/activities")
 public class ActivityController {
@@ -16,6 +19,7 @@ public class ActivityController {
         this.activityService = activityService;
     }
 
+    @LogExecutionTime("Find all activities")  // <-- Add it here
     @GetMapping
     public List<ActivityResponse> findAll() {
         return activityService.findAll();
@@ -23,6 +27,8 @@ public class ActivityController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ActivityResponse> findById(@PathVariable Long id) {
+        log.debug("Getting activity with ID: {}", id);  // Debug level log
+        log.info("Processing request for activity ID: {}", id);  // Info level log
         ActivityResponse response = activityService.findById(id);
         return ResponseEntity.ok(response);
     }
