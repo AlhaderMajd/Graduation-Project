@@ -1,55 +1,91 @@
-//package com.example.Graduation.Project.security;
-//
-//import com.example.Graduation.Project.user.UserService;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.http.HttpMethod;
-//import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-//import org.springframework.security.config.Customizer;
-//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-//import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.crypto.password.PasswordEncoder;
-//import org.springframework.security.web.SecurityFilterChain;
-//
-//@Configuration
-//@EnableWebSecurity
-//public class SecurityConfig {
-//
-//    private final UserService userDetailsService;
-//
-//    public SecurityConfig(UserService userDetailsService) {
-//        this.userDetailsService = userDetailsService;
-//    }
-//
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http
-//                .csrf(AbstractHttpConfigurer::disable)
-//                .authorizeHttpRequests(auth -> auth
-//                        //.requestMatchers("/api/colleges").authenticated()
-//                        //.requestMatchers(HttpMethod.GET, "/api/users/{userId}").hasAnyRole("ADMIN", "AUTHOR", "MEMBER")
-//                        .requestMatchers(HttpMethod.GET, "/api/colleges").hasRole("طالب")
-//                        .anyRequest().denyAll()
-//                )
-//                .httpBasic(Customizer.withDefaults()) // Use Basic Auth instead
-//                .formLogin(AbstractHttpConfigurer::disable); // Disable form login
-//
-//        http.authenticationProvider(authenticationProvider());
-//        return http.build();
-//    }
-//
-//    @Bean
-//    public DaoAuthenticationProvider authenticationProvider() {
-//        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-//        authProvider.setUserDetailsService(userDetailsService);
-//        authProvider.setPasswordEncoder(passwordEncoder());
-//        return authProvider;
-//    }
-//
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//}
+package com.example.Graduation.Project.security;
+
+import com.example.Graduation.Project.security.jwt.JwtAuthenticationFilter;
+import com.example.Graduation.Project.security.jwt.JwtTokenProvider;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    private final JwtTokenProvider jwtTokenProvider;
+
+    public SecurityConfig(JwtTokenProvider jwtTokenProvider) {
+        this.jwtTokenProvider = jwtTokenProvider;
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(csrf -> csrf.disable())
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/error").permitAll()
+
+                        // Public endpoints
+                        .requestMatchers(HttpMethod.GET, "/api/colleges").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/locations").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/activity-types").permitAll()
+
+                        // User management - admin only
+                        .requestMatchers(HttpMethod.GET, "/api/users").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/users").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/users/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("ADMIN")
+
+                        // Activity management
+                        .requestMatchers(HttpMethod.GET, "/api/activities").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/activities/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/activities").hasAnyRole("STUDENT", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/activities/**").hasAnyRole("STUDENT", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/activities/**").hasAnyRole("STUDENT", "ADMIN")
+
+                        // Workflow management
+                        .requestMatchers(HttpMethod.GET, "/api/workflows").hasAnyRole("SUPERVISOR", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/workflows").hasAnyRole("SUPERVISOR", "ADMIN")
+
+                        // Other management endpoints
+                        .requestMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
+
+                        .anyRequest().authenticated()
+                )
+                .addFilterBefore(
+                        new JwtAuthenticationFilter(jwtTokenProvider),
+                        UsernamePasswordAuthenticationFilter.class
+                )
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+                );
+
+        return http.build();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(
+            AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+}

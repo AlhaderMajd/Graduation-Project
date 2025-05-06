@@ -4,6 +4,7 @@ import com.example.Graduation.Project.college.College;
 import com.example.Graduation.Project.college.CollegeRepository;
 import com.example.Graduation.Project.role.Role;
 import com.example.Graduation.Project.role.RoleRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -15,17 +16,21 @@ public class UserService {
     private final UserMapper userMapper;
     private final RoleRepository roleRepository;
     private final CollegeRepository collegeRepository;
+    private final PasswordEncoder passwordEncoder;
+
 
     public UserService(
             UserRepository userRepository,
             UserMapper userMapper,
             RoleRepository roleRepository,
-            CollegeRepository collegeRepository
+            CollegeRepository collegeRepository,
+            PasswordEncoder passwordEncoder
     ) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.roleRepository = roleRepository;
         this.collegeRepository = collegeRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<UserResponse> findAll() {
@@ -50,6 +55,8 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("College not found with id: " + userRequest.getCollegeId()));
 
         User user = userMapper.toUser(userRequest, role, college);
+        user.setPassword(passwordEncoder.encode(userRequest.getPassword())); // Encode password
+
         User savedUser = userRepository.save(user);
         return userMapper.toUserResponse(savedUser);
     }
