@@ -1,4 +1,4 @@
-//package com.example.Graduation.Project.config;
+//package com.example.Graduation.Project;
 //
 //import com.example.Graduation.Project.activity.Activity;
 //import com.example.Graduation.Project.activity.ActivityRepository;
@@ -14,8 +14,6 @@
 //import com.example.Graduation.Project.status.StatusRepository;
 //import com.example.Graduation.Project.user.User;
 //import com.example.Graduation.Project.user.UserRepository;
-//import com.example.Graduation.Project.workflow.Workflow;
-//import com.example.Graduation.Project.workflow.WorkflowRepository;
 //import org.springframework.boot.CommandLineRunner;
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
@@ -37,11 +35,9 @@
 //                                   StatusRepository statusRepository,
 //                                   UserRepository userRepository,
 //                                   ActivityRepository activityRepository,
-//                                   WorkflowRepository workflowRepository,
 //                                   PasswordEncoder passwordEncoder) {
 //        return args -> {
 //            // Clear all existing data first (in reverse order of dependencies)
-//            workflowRepository.deleteAll();
 //            activityRepository.deleteAll();
 //            userRepository.deleteAll();
 //            statusRepository.deleteAll();
@@ -251,63 +247,29 @@
 //            activity.setEndTime(LocalDateTime.now().plusDays(7).plusHours(3));
 //            activity.setCreatedAt(LocalDateTime.now());
 //
-//            Activity savedActivity = activityRepository.save(activity);
+//            // Set initial status and assignee (replacing Workflow functionality)
+//            activity.setStatus(pending);
+//            activity.setAssignee(prof1);
+//            activity.setActionDate(LocalDateTime.now());
 //
-//            // === إنشاء سير العمل للطلب ===
-//            // 1. الأستاذ المشرف
-//            Workflow profWorkflow = new Workflow();
-//            profWorkflow.setAssignee(prof1);
-//            profWorkflow.setRequest(savedActivity);
-//            profWorkflow.setStatus(pending);
-//            profWorkflow.setActionDate(LocalDateTime.now());
+//            activityRepository.save(activity);
 //
-//            // 2. نائب عميد الكلية
-//            Workflow viceDeanWorkflow = new Workflow();
-//            viceDeanWorkflow.setAssignee(itViceDean);
-//            viceDeanWorkflow.setRequest(savedActivity);
-//            viceDeanWorkflow.setStatus(pending);
+//            // Create a second activity example with a different assignee
+//            Activity activity2 = new Activity();
+//            activity2.setRequester(student1);
+//            activity2.setType(workshop);
+//            activity2.setSupervisor(prof1);
+//            activity2.setLocation(conferenceRoom);
+//            activity2.setDescription("ورشة عمل حول تطوير تطبيقات الويب");
+//            activity2.setObjectives("تعزيز مهارات تطوير الويب");
+//            activity2.setStartTime(LocalDateTime.now().plusDays(14));
+//            activity2.setEndTime(LocalDateTime.now().plusDays(14).plusHours(4));
+//            activity2.setCreatedAt(LocalDateTime.now().minusDays(1));
+//            activity2.setStatus(pending);
+//            activity2.setAssignee(itViceDean);
+//            activity2.setActionDate(LocalDateTime.now().minusDays(1));
 //
-//            // 3. عميد الكلية
-//            Workflow deanWorkflow = new Workflow();
-//            deanWorkflow.setAssignee(itDean);
-//            deanWorkflow.setRequest(savedActivity);
-//            deanWorkflow.setStatus(pending);
-//
-//            // 4. الاتحاد الطلابي (عرض فقط)
-//            Workflow unionWorkflow = new Workflow();
-//            unionWorkflow.setAssignee(studentUnionUser);
-//            unionWorkflow.setRequest(savedActivity);
-//            unionWorkflow.setStatus(pending);
-//
-//            // 5. رئيس شعبة الاتحاد الطلابي
-//            Workflow headWorkflow = new Workflow();
-//            headWorkflow.setAssignee(studentUnionHead);
-//            headWorkflow.setRequest(savedActivity);
-//            headWorkflow.setStatus(pending);
-//
-//            // 6. مدير دائرة الهيئات الطلابية
-//            Workflow directorWorkflow = new Workflow();
-//            directorWorkflow.setAssignee(director);
-//            directorWorkflow.setRequest(savedActivity);
-//            directorWorkflow.setStatus(pending);
-//
-//            // 7. نائب عميد شؤون الطلبة
-//            Workflow viceDeanAffairsWorkflow = new Workflow();
-//            viceDeanAffairsWorkflow.setAssignee(viceDeanAffairs);
-//            viceDeanAffairsWorkflow.setRequest(savedActivity);
-//            viceDeanAffairsWorkflow.setStatus(pending);
-//
-//            // 8. عميد شؤون الطلبة
-//            Workflow deanAffairsWorkflow = new Workflow();
-//            deanAffairsWorkflow.setAssignee(deanAffairs);
-//            deanAffairsWorkflow.setRequest(savedActivity);
-//            deanAffairsWorkflow.setStatus(pending);
-//
-//            workflowRepository.saveAll(Arrays.asList(
-//                    profWorkflow, viceDeanWorkflow, deanWorkflow,
-//                    unionWorkflow, headWorkflow, directorWorkflow,
-//                    viceDeanAffairsWorkflow, deanAffairsWorkflow
-//            ));
+//            activityRepository.save(activity2);
 //
 //            System.out.println("✅ تم إدخال البيانات الأولية بنجاح.");
 //        };

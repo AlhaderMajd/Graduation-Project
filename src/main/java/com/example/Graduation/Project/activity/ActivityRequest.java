@@ -2,7 +2,6 @@ package com.example.Graduation.Project.activity;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
 
 @Getter
@@ -16,4 +15,9 @@ public class ActivityRequest {
     private String objectives;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+
+    //New fields
+    private Long statusId;
+    private Long assigneeId;
+    private String comment;
 }

@@ -2,6 +2,7 @@ package com.example.Graduation.Project.activity;
 
 import com.example.Graduation.Project.activityType.ActivityType;
 import com.example.Graduation.Project.location.Location;
+import com.example.Graduation.Project.status.Status;
 import com.example.Graduation.Project.user.UserResponse;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,4 +22,10 @@ public class ActivityResponse {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private LocalDateTime createdAt;
+
+    // New fields
+    private Status status;
+    private UserResponse assignee;
+    private LocalDateTime actionDate;
+    private String comment;
 }

@@ -3,11 +3,7 @@ package com.example.Graduation.Project.location;
 import com.example.Graduation.Project.college.College;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-@Setter
-@Getter
 @Entity
 @Table(name = "locations")
 @Data

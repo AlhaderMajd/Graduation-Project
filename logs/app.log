@@ -1,22 +1,22 @@
-2025-05-06T17:23:39.988+03:00  INFO 32843 --- [main] c.e.G.P.GraduationProjectApplication     : Starting GraduationProjectApplication using Java 23.0.1 with PID 32843 (/Users/macbookpro/Desktop/Graduation-Project/target/classes started by macbookpro in /Users/macbookpro/Desktop/Graduation-Project)
-2025-05-06T17:23:39.989+03:00  INFO 32843 --- [main] c.e.G.P.GraduationProjectApplication     : No active profile set, falling back to 1 default profile: "default"
-2025-05-06T17:23:40.345+03:00  INFO 32843 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-05-06T17:23:40.377+03:00  INFO 32843 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 27 ms. Found 8 JPA repository interfaces.
-2025-05-06T17:23:40.740+03:00  INFO 32843 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-05-06T17:23:40.747+03:00  INFO 32843 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-05-06T17:23:40.747+03:00  INFO 32843 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
-2025-05-06T17:23:40.766+03:00  INFO 32843 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-05-06T17:23:40.766+03:00  INFO 32843 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 744 ms
-2025-05-06T17:23:40.846+03:00  INFO 32843 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-05-06T17:23:40.874+03:00  INFO 32843 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
-2025-05-06T17:23:40.889+03:00  INFO 32843 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-05-06T17:23:41.004+03:00  INFO 32843 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-05-06T17:23:41.018+03:00  INFO 32843 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-05-06T17:23:41.266+03:00  INFO 32843 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@fbbd90c
-2025-05-06T17:23:41.267+03:00  INFO 32843 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-05-06T17:23:41.296+03:00  WARN 32843 --- [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-05-06T17:23:41.296+03:00  WARN 32843 --- [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-05-06T17:23:41.304+03:00  INFO 32843 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2025-05-24T17:23:53.682+03:00  INFO 70804 --- [main] c.e.G.P.GraduationProjectApplication     : Starting GraduationProjectApplication using Java 23.0.1 with PID 70804 (/Users/macbookpro/Desktop/Graduation-Project/target/classes started by macbookpro in /Users/macbookpro/Desktop/Graduation-Project)
+2025-05-24T17:23:53.684+03:00  INFO 70804 --- [main] c.e.G.P.GraduationProjectApplication     : No active profile set, falling back to 1 default profile: "default"
+2025-05-24T17:23:53.990+03:00  INFO 70804 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-24T17:23:54.019+03:00  INFO 70804 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 25 ms. Found 7 JPA repository interfaces.
+2025-05-24T17:23:54.232+03:00  INFO 70804 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-24T17:23:54.239+03:00  INFO 70804 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-24T17:23:54.239+03:00  INFO 70804 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-24T17:23:54.254+03:00  INFO 70804 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-24T17:23:54.255+03:00  INFO 70804 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 549 ms
+2025-05-24T17:23:54.322+03:00  INFO 70804 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-24T17:23:54.349+03:00  INFO 70804 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-05-24T17:23:54.362+03:00  INFO 70804 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-24T17:23:54.489+03:00  INFO 70804 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-24T17:23:54.503+03:00  INFO 70804 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-24T17:23:54.748+03:00  INFO 70804 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@30fa8a6b
+2025-05-24T17:23:54.749+03:00  INFO 70804 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-24T17:23:54.779+03:00  WARN 70804 --- [main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-24T17:23:54.779+03:00  WARN 70804 --- [main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-05-24T17:23:54.786+03:00  INFO 70804 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 8.0
@@ -24,14 +24,10 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-05-06T17:23:41.704+03:00  INFO 32843 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-05-06T17:23:41.776+03:00  INFO 32843 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-05-06T17:23:42.025+03:00  INFO 32843 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
-2025-05-06T17:23:42.074+03:00  WARN 32843 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-05-06T17:23:42.351+03:00  INFO 32843 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-05-06T17:23:42.356+03:00  INFO 32843 --- [main] c.e.G.P.GraduationProjectApplication     : Started GraduationProjectApplication in 2.61 seconds (process running for 2.838)
-2025-05-06T17:24:14.817+03:00  INFO 32843 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2025-05-06T17:24:14.828+03:00  INFO 32843 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
-2025-05-06T17:24:14.833+03:00  INFO 32843 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-05-06T17:24:14.835+03:00  INFO 32843 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-05-06T17:24:14.847+03:00  INFO 32843 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-05-24T17:23:55.171+03:00  INFO 70804 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-24T17:23:55.261+03:00  INFO 70804 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-24T17:23:55.461+03:00  INFO 70804 --- [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2025-05-24T17:23:55.477+03:00  WARN 70804 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-24T17:23:55.512+03:00  INFO 70804 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2025-05-24T17:23:55.686+03:00  INFO 70804 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-24T17:23:55.690+03:00  INFO 70804 --- [main] c.e.G.P.GraduationProjectApplication     : Started GraduationProjectApplication in 2.204 seconds (process running for 2.575)

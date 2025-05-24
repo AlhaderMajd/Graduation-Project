@@ -1,9 +1,12 @@
 package com.example.Graduation.Project.activity;
+
 import com.example.Graduation.Project.activityType.ActivityType;
 import com.example.Graduation.Project.location.Location;
+import com.example.Graduation.Project.status.Status;
 import com.example.Graduation.Project.user.User;
 import jakarta.persistence.*;
 import lombok.Data;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -46,4 +49,18 @@ public class Activity {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    // New fields from Workflow
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private Status status;
+
+    @ManyToOne
+    @JoinColumn(name = "assignee_id")
+    private User assignee;
+
+    @Column(name = "action_date")
+    private LocalDateTime actionDate;
+
+    @Column(name = "comment")
+    private String comment;
 }
